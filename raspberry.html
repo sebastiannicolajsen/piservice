@@ -1,0 +1,35 @@
+<html>
+    <body>
+        <div>Current status:</div>
+        <div id="display"></div>
+        <script>
+            const field = document.getElementById("display");
+            let showing = false;
+
+            function listen(){
+                if(!showing) {
+                    console.log("new listen")
+                    const xhr = new XMLHttpRequest();
+                    xhr.open("GET", "http://localhost:3000/status/400");
+                    xhr.send();
+                    xhr.responseType = "json";
+                    xhr.onload = () => {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            const data = xhr.response;
+                            if(data.result){
+                                showing = true;
+                                field.innerHTML = "Playing sound..."
+                                console.log("updated contents")
+                                setTimeout(() => {field.innerHTML = ""; showing = false}, 10000)
+                            }
+                        } else {
+                            console.log(`Error: ${xhr.status}`);
+                        }
+                    }
+                };  
+                setTimeout(() => listen(), 2000);
+            }
+            listen();
+        </script>
+    </body>
+</html>

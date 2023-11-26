@@ -1,0 +1,13 @@
+<html>
+    <body>
+        <script>
+            function submit(){
+                console.log(400);
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET", "http://localhost:3000/update/400");
+                xhr.send();
+            }
+        </script>
+        <button onclick="submit()">Activate for id 400</button>
+    </body>
+</html>

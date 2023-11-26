@@ -3,8 +3,10 @@
 
 
 const express = require("express");
+const cors = require('cors');
 
 const app = express();
+app.use(cors()); // to allow cross origin
 
 const PORT = process.env.PORT || 3000;
 const TIMEOUT = 10000 //ms
@@ -18,7 +20,6 @@ app.get("/status/:id", (req, res)  => {
     console.log("Status requested for " + id)
     if(keys[id] !== undefined) res.json({result: keys[id]})
     else res.json({result: false})
-    res.send();
 })
 
 app.get("/update/:id", (req, res) => {
